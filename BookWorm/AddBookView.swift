@@ -35,6 +35,8 @@ struct AddBookView: View {
                         ForEach(genres, id: \.self) {
                             Text($0)
                         }
+                    }.onAppear {
+                        genre = genres[0]
                     }
                 }
 
