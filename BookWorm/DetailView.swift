@@ -40,6 +40,10 @@ struct DetailView: View {
 
                 RatingView(rating: .constant(Int(self.book.rating)))
                     .font(.largeTitle)
+                    .padding()
+                
+                Text("\(formatDate())")
+                    .padding()
 
                 Spacer()
             }
@@ -62,6 +66,20 @@ struct DetailView: View {
         moc.delete(book)
         try? self.moc.save()
         presentationMode.wrappedValue.dismiss()
+    }
+    
+    func formatDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        var formatedDate: String
+        
+        if let date = book.date {
+            formatedDate = "Added on \(dateFormatter.string(from: date))"
+        } else {
+            formatedDate = ""
+        }
+        
+        return formatedDate
     }
 }
 
